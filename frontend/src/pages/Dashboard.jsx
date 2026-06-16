@@ -231,7 +231,6 @@ const Dashboard = () => {
           </p>
         </div>
       </div>
-
       {/* Middle Section */}
       <div className="grid lg:grid-cols-2 gap-6 mb-6">
         {/* Checklist */}
