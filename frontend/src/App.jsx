@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
 import Checklists from "./pages/dashboard/Checklists";
 import DashboardHome from "./pages/dashboard/DashboardHome";
 import Guides from "./pages/dashboard/Guides";
@@ -13,6 +14,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/login" element={<Login />} />
         <Route path="/" element={<Dashboard />}>
           <Route index element={<DashboardHome />} />
           <Route path="my-drone" element={<MyDrone />} />

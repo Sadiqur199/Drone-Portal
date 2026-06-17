@@ -1,4 +1,9 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Navigate, Outlet, useNavigate } from "react-router-dom";
+import {
+  authStorageKey,
+  getAuthenticatedPortalUser,
+  useDashboardData,
+} from "./dashboard/useDashboardData";
 
 const tabs = [
   { label: "Dashboard", path: "/" },
@@ -12,6 +17,20 @@ const tabs = [
 ];
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+  const portalUser = getAuthenticatedPortalUser();
+  const dashboardData = useDashboardData();
+  const { drone, user } = dashboardData;
+
+  if (!portalUser) {
+    return <Navigate to="/login" replace />;
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem(authStorageKey);
+    navigate("/login", { replace: true });
+  };
+
   return (
     <div className="min-h-screen bg-slate-50">
       <header className="border-b bg-white">
@@ -30,14 +49,14 @@ const Dashboard = () => {
 
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-3 rounded-lg border border-green-200 bg-green-50 px-4 py-2">
-              <span className="font-semibold text-green-800">DJI Agras T50</span>
-              <span className="text-gray-400">SN - 7741-WA-T50</span>
+              <span className="font-semibold text-green-800">{drone.model}</span>
+              <span className="text-gray-400">SN - {drone.serialNumber}</span>
             </div>
 
             <div className="flex items-center gap-3">
-              <span className="text-sm text-gray-700">Judy Zhu</span>
+              <span className="text-sm text-gray-700">{user.name}</span>
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-green-700 font-semibold text-white">
-                JZ
+                {user.initials}
               </div>
             </div>
           </div>
@@ -64,6 +83,16 @@ const Dashboard = () => {
             ))}
           </ul>
         </nav>
+
+        <div className="flex justify-end px-8 pb-4">
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50"
+          >
+            Logout
+          </button>
+        </div>
       </header>
 
       <main className="p-6">

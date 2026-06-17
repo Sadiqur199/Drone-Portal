@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Play } from "lucide-react";
 import { tutorialCategories, tutorialVideos } from "./data";
+import { useDashboardData } from "./useDashboardData";
 
 const badgeColors = {
   "Getting Started": "bg-green-600",
@@ -13,6 +14,7 @@ const badgeColors = {
 
 const Tutorials = () => {
   const [activeTab, setActiveTab] = useState("All Videos");
+  const { drone } = useDashboardData();
 
   const filteredVideos =
     activeTab === "All Videos"
@@ -28,7 +30,7 @@ const Tutorials = () => {
         <p className="text-sm text-gray-400">Video library</p>
 
         <h1 className="mt-1 text-4xl font-bold text-slate-900">
-          Tutorials for DJI Agras T50
+          Tutorials for {drone.model}
         </h1>
 
         {/* Tabs */}

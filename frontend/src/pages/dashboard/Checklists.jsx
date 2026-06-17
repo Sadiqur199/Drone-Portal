@@ -1,7 +1,9 @@
 import { SectionCard } from "./shared";
-import { checklistItems } from "./data";
+import { useDashboardData } from "./useDashboardData";
 
 const Checklists = () => {
+  const { checklistItems, drone } = useDashboardData();
+
   return (
     <div className="grid gap-6 lg:grid-cols-2">
       <SectionCard title="Today">
@@ -30,7 +32,7 @@ const Checklists = () => {
               <div key={item} className="rounded-xl border p-4">
                 <h4 className="font-semibold text-slate-900">{item}</h4>
                 <p className="text-sm text-gray-500">
-                  Scheduled before September 2025 service window
+                  Scheduled before {drone.nextServiceDue} service window
                 </p>
               </div>
             ),

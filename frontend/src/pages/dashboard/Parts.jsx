@@ -1,10 +1,12 @@
 import { useMemo, useState } from "react";
-import { dronePartSections } from "./data";
+import { useDashboardData } from "./useDashboardData";
 
 const Parts = () => {
-  const [selectedSection, setSelectedSection] = useState(
-    dronePartSections[0]
-  );
+  const { drone, partSections } = useDashboardData();
+  const [selectedSectionId, setSelectedSectionId] = useState(partSections[0].id);
+  const selectedSection =
+    partSections.find((section) => section.id === selectedSectionId) ||
+    partSections[0];
 
   const [cart, setCart] = useState([]);
 
@@ -26,7 +28,7 @@ const Parts = () => {
         <div className="col-span-8">
           <div className="rounded-3xl bg-white p-6 shadow">
             <h2 className="text-3xl font-bold">
-              Parts for DJI Agras T100
+              Parts for {drone.model}
             </h2>
 
             <p className="mt-2 text-gray-500">
@@ -35,15 +37,15 @@ const Parts = () => {
 
             <div className="relative mt-6">
               <img
-                src="/drone.png"
-                alt=""
+                src={drone.image}
+                alt={drone.model}
                 className="mx-auto max-h-[500px]"
               />
 
-              {dronePartSections.map((section) => (
+              {partSections.map((section) => (
                 <button
                   key={section.id}
-                  onClick={() => setSelectedSection(section)}
+                  onClick={() => setSelectedSectionId(section.id)}
                   className="absolute h-10 w-10 rounded-full bg-green-700 text-white font-bold shadow-lg"
                   style={{
                     top: section.position.top,
@@ -56,10 +58,10 @@ const Parts = () => {
             </div>
 
             <div className="mt-8 flex flex-wrap gap-4">
-              {dronePartSections.map((item) => (
+              {partSections.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => setSelectedSection(item)}
+                  onClick={() => setSelectedSectionId(item.id)}
                   className="flex items-center gap-2"
                 >
                   <span className="flex h-7 w-7 items-center justify-center rounded-full bg-green-700 text-white text-sm">
@@ -83,7 +85,7 @@ const Parts = () => {
             </div>
 
             <div className="p-4 space-y-4">
-              {selectedSection.parts.map((part) => (
+              {selectedSection?.parts.map((part) => (
                 <div
                   key={part.id}
                   className="flex items-center justify-between border-b pb-4"

@@ -8,6 +8,7 @@ import {
   Gamepad2,
   PlayCircle,
 } from "lucide-react";
+import { useDashboardData } from "./useDashboardData";
 
 const troubleshootData = [
   {
@@ -68,6 +69,7 @@ const troubleshootData = [
 
 const Troubleshoot = () => {
   const [selectedIssue, setSelectedIssue] = useState(troubleshootData[0]);
+  const { drone } = useDashboardData();
 
   return (
     <div className="space-y-8">
@@ -78,7 +80,7 @@ const Troubleshoot = () => {
         </p>
 
         <h1 className="text-3xl font-bold text-slate-900">
-          Troubleshoot your T50
+          Troubleshoot your {drone.shortModel}
         </h1>
 
         <p className="mt-2 text-gray-500">
