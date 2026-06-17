@@ -7,7 +7,7 @@ import {
   componentHealth,
   dashboardStats,
   droneSpecs,
-  tutorials,
+  tutorialVideos,
 } from "./data";
 
 const DashboardHome = () => {
@@ -76,19 +76,17 @@ const DashboardHome = () => {
 
         <SectionCard title="Recent Tutorials" action="See all">
           <div className="grid grid-cols-2 gap-4">
-            {tutorials.map((item) => (
-              <div key={item} className="overflow-hidden rounded-xl border">
-                <div className="flex h-32 items-center justify-center bg-green-800 text-3xl font-bold text-white">
-                  {item
-                    .split(" ")
-                    .map((word) => word[0])
-                    .join("")}
-                </div>
-                <div className="p-3">
-                  <h4 className="font-medium text-slate-900">{item}</h4>
-                  <p className="text-xs text-gray-500">Tutorial</p>
-                </div>
+            {tutorialVideos.slice(0, 4).map((item) => (<div key={item.id}
+ className="overflow-hidden rounded-xl border">
+              <div className="flex h-32 items-center justify-center bg-green-800 text-3xl font-bold text-white">
+             
               </div>
+              <div className="p-3">
+                <h4 className="font-medium text-slate-900">    {item.title}
+</h4>
+                <p className="text-xs text-gray-500">Tutorial</p>
+              </div>
+            </div>
             ))}
           </div>
         </SectionCard>

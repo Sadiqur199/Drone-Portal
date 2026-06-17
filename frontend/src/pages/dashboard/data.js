@@ -21,11 +21,70 @@ export const checklistItems = [
   ["Battery storage charge", "Upcoming", "bg-blue-100 text-blue-700"],
 ];
 
-export const tutorials = [
-  "First Flight Setup",
-  "RTK Signal Setup",
-  "Spray Calibration",
-  "End of Season Storage",
+export const tutorialCategories = [
+  "All Videos",
+  "Getting Started",
+  "Operations",
+  "Maintenance",
+  "Advanced",
+  "Troubleshooting",
+];
+
+export const tutorialVideos = [
+  {
+    id: 1,
+    category: "Getting Started",
+    title: "First flight setup",
+    description:
+      "Unboxing, pre-flight checks and your first autonomous mission",
+    duration: "4:32",
+    thumbnail: "",
+  },
+  {
+    id: 2,
+    category: "Getting Started",
+    title: "Connecting to DJI Agras app",
+    description:
+      "Pairing your RC Plus 2 and setting up your field map",
+    duration: "5:14",
+    thumbnail: "",
+  },
+  {
+    id: 3,
+    category: "Operations",
+    title: "Spray rate calibration",
+    description:
+      "Dialling in your nozzle output for accurate coverage",
+    duration: "3:47",
+    thumbnail: "",
+  },
+  {
+    id: 4,
+    category: "Operations",
+    title: "RTK setup & signal lock",
+    description:
+      "Positioning your base station and achieving RTK fixed mode",
+    duration: "7:02",
+    thumbnail: "",
+  },
+  {
+    id: 5,
+    category: "Maintenance",
+    title: "Post-spray system flush",
+    description:
+      "Flushing the tank, pipes and nozzles after each use",
+    duration: "6:30",
+    thumbnail: "",
+  },
+  {
+    id: 6,
+    category: "Maintenance",
+    title: "End of season storage",
+    description:
+      "Full winterisation — batteries, spray system and propellers",
+    duration: "8:05",
+    thumbnail: "",
+  },
 ];
 
 export const componentHealth = [
@@ -49,15 +108,101 @@ export const guideItems = [
   ["Storage guide", "Clean down and battery storage steps for long breaks."],
 ];
 
-export const parts = [
-  ["Propeller Set", "Recommended", "$89"],
-  ["Nozzle Kit", "In stock", "$42"],
-  ["Spray Pump Filter", "Low stock", "$18"],
-  ["Battery Charger Cable", "In stock", "$36"],
-];
+export const dronePartSections = [
+  {
+    id: 1,
+    title: "Propeller Parts",
+    position: {
+      top: "35%",
+      left: "12%",
+    },
+    parts: [
+      {
+        id: 101,
+        name: "Front Left Propeller",
+        price: 89,
+        stock: true,
+      },
+      {
+        id: 102,
+        name: "Propeller Mount",
+        price: 25,
+        stock: true,
+      },
+    ],
+  },
 
-export const supportTickets = [
-  ["RTK connection drops", "Open", "Technician reviewing logs"],
-  ["Warranty document request", "Resolved", "PDF sent to account email"],
-  ["Pump calibration question", "Waiting", "Reply requested from client"],
+  {
+    id: 2,
+    title: "Motor Assembly",
+    position: {
+      top: "33%",
+      left: "28%",
+    },
+    parts: [
+      {
+        id: 201,
+        name: "Brushless Motor",
+        price: 295,
+        stock: true,
+      },
+      {
+        id: 202,
+        name: "Motor Housing",
+        price: 95,
+        stock: true,
+      },
+    ],
+  },
+
+  {
+    id: 3,
+    title: "RTK Module",
+    position: {
+      top: "18%",
+      left: "50%",
+    },
+    parts: [
+      {
+        id: 301,
+        name: "RTK Antenna",
+        price: 120,
+        stock: true,
+      },
+    ],
+  },
+
+  {
+    id: 4,
+    title: "Spray System",
+    position: {
+      top: "58%",
+      left: "48%",
+    },
+    parts: [
+      {
+        id: 401,
+        name: "Spray Pump",
+        price: 295,
+        stock: true,
+      },
+      {
+        id: 402,
+        name: "Nozzle Kit",
+        price: 64,
+        stock: true,
+      },
+      {
+        id: 403,
+        name: "Inline Filter",
+        price: 38,
+        stock: true,
+      },
+    ],
+  },
 ];
+// export const supportTickets = [
+//   ["RTK connection drops", "Open", "Technician reviewing logs"],
+//   ["Warranty document request", "Resolved", "PDF sent to account email"],
+//   ["Pump calibration question", "Waiting", "Reply requested from client"],
+// ];
