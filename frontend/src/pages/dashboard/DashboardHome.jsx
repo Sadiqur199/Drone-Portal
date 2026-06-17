@@ -1,5 +1,4 @@
 import { SectionCard, StatCard } from "./shared";
-import { tutorialVideos } from "./data";
 import { useDashboardData } from "./useDashboardData";
 
 const DashboardHome = () => {
@@ -12,6 +11,7 @@ const DashboardHome = () => {
     user,
     maintenanceAlert,
     serviceHistory,
+    tutorialVideos,
     warrantyPeriod,
   } = useDashboardData();
 

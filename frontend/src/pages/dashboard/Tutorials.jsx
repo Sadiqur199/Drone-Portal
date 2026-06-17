@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Play } from "lucide-react";
-import { tutorialCategories, tutorialVideos } from "./data";
+import { tutorialCategories } from "./data";
 import { useDashboardData } from "./useDashboardData";
 
 const badgeColors = {
@@ -14,7 +14,7 @@ const badgeColors = {
 
 const Tutorials = () => {
   const [activeTab, setActiveTab] = useState("All Videos");
-  const { drone } = useDashboardData();
+  const { drone, tutorialVideos } = useDashboardData();
 
   const filteredVideos =
     activeTab === "All Videos"

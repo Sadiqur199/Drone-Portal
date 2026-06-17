@@ -100,6 +100,116 @@ const t40TutorialVideos = [
   },
 ];
 
+const t50TroubleshootIssues = [
+  {
+    id: 1,
+    title: "T50 will not power on",
+    icon: "Power",
+    description:
+      "Check DB2160 battery seating, power button sequence and aircraft battery charge.",
+    steps: [
+      "Confirm both battery locks are fully engaged",
+      "Hold the aircraft power button for the full startup sequence",
+      "Try a fully charged DB2160 battery set",
+    ],
+    video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+  },
+  {
+    id: 2,
+    title: "T50 RTK signal not locking",
+    icon: "Radio",
+    description:
+      "Inspect D-RTK placement, antenna alignment and network correction status.",
+    steps: [
+      "Move the RTK station to a clear open area",
+      "Check antenna alignment and cable connection",
+      "Restart RTK correction in the Agras app",
+    ],
+    video: "https://www.youtube.com/embed/M7lc1UVf-VE",
+  },
+  {
+    id: 3,
+    title: "T50 spray pump pressure drop",
+    icon: "Droplets",
+    description:
+      "Check filter blockage, tank level and pump calibration before starting another mission.",
+    steps: [
+      "Clean the inline filter and nozzle screens",
+      "Run pump calibration from the controller",
+      "Inspect hose fittings for air leaks",
+    ],
+    video: "https://www.youtube.com/embed/ysz5S6PUM-U",
+  },
+  {
+    id: 4,
+    title: "DB2160 battery will not charge",
+    icon: "BatteryCharging",
+    description:
+      "Verify charger status, battery temperature and connector condition.",
+    steps: [
+      "Let the battery return to normal temperature",
+      "Inspect charger pins for dirt or damage",
+      "Try another charger channel",
+    ],
+    video: "https://www.youtube.com/embed/jNQXAC9IVRw",
+  },
+];
+
+const t40TroubleshootIssues = [
+  {
+    id: 1,
+    title: "T40 controller will not pair",
+    icon: "Gamepad2",
+    description:
+      "Rebind the RC Plus controller and verify the aircraft is in pairing mode.",
+    steps: [
+      "Open pairing mode from the controller settings",
+      "Keep controller and aircraft within two metres",
+      "Restart both devices and try binding again",
+    ],
+    video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+  },
+  {
+    id: 2,
+    title: "T40 firmware update stuck",
+    icon: "Cpu",
+    description:
+      "Check internet connection, storage space and battery level before retrying the update.",
+    steps: [
+      "Connect the controller to a stable network",
+      "Keep aircraft and controller batteries above 50%",
+      "Clear update cache and download firmware again",
+    ],
+    video: "https://www.youtube.com/embed/M7lc1UVf-VE",
+  },
+  {
+    id: 3,
+    title: "T40 atomised nozzles uneven",
+    icon: "Droplets",
+    description:
+      "Inspect nozzle wear, clean the atomised discs and confirm spray calibration.",
+    steps: [
+      "Clean each atomised nozzle assembly",
+      "Replace worn nozzle discs",
+      "Run spray rate calibration after cleaning",
+    ],
+    video: "https://www.youtube.com/embed/ysz5S6PUM-U",
+  },
+  {
+    id: 4,
+    title: "T40 battery drains quickly",
+    icon: "BatteryCharging",
+    description:
+      "Review battery cycle count, temperature and mission load for abnormal drain.",
+    steps: [
+      "Check battery health in the Agras app",
+      "Avoid takeoff with cold batteries",
+      "Compare drain across both DB1560 packs",
+    ],
+    video: "https://www.youtube.com/embed/jNQXAC9IVRw",
+  },
+];
+
 export const guideItems = [
   ["Pre-season setup", "Prepare batteries, tanks, nozzles, and route maps."],
   ["Spray safety", "Wind checks, PPE reminders, and chemical handling notes."],
@@ -323,6 +433,8 @@ export const droneProfiles = {
       { name: "Warranty certificate", type: "PDF - 0.4 MB" },
       { name: "Parts diagram (T50)", type: "PDF - 5.8 MB" },
     ],
+    tutorialVideos: t50TutorialVideos,
+    troubleshootIssues: t50TroubleshootIssues,
     partSections: t50PartSections,
     supportCategories: commonSupportCategories,
   },
@@ -410,6 +522,8 @@ export const droneProfiles = {
       { name: "Warranty certificate", type: "PDF - 0.4 MB" },
       { name: "Parts diagram (T40)", type: "PDF - 5.2 MB" },
     ],
+    tutorialVideos: t40TutorialVideos,
+    troubleshootIssues: t40TroubleshootIssues,
     partSections: t40PartSections,
     supportCategories: commonSupportCategories,
   },
@@ -456,6 +570,8 @@ export const normalizeApiDrone = (apiDrone) => {
     accessories: apiDrone.accessories,
     technicalSpecifications: apiDrone.technical_specifications,
     documents: apiDrone.documents,
+    tutorialVideos: apiDrone.tutorial_videos || [],
+    troubleshootIssues: apiDrone.troubleshoot_issues || [],
     partSections: apiDrone.part_sections,
     supportCategories: apiDrone.support_categories || commonSupportCategories,
   };
@@ -468,3 +584,5 @@ export const dashboardStats = defaultData.dashboardStats;
 export const checklistItems = defaultData.checklistItems;
 export const componentHealth = defaultData.componentHealth;
 export const dronePartSections = defaultData.partSections;
+export const tutorialVideos = defaultData.tutorialVideos;
+export const troubleshootIssues = defaultData.troubleshootIssues;
