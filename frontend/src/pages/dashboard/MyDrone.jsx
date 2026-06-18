@@ -79,9 +79,20 @@ const MyDrone = () => {
                     <p className="text-sm text-gray-400">{doc.type}</p>
                   </div>
 
-                  <button className="rounded-full bg-gray-100 px-4 py-1 text-sm font-medium text-gray-500 hover:bg-gray-200">
-                    Download
-                  </button>
+                  {doc.url || doc.contentUrl || doc.file_url ? (
+                    <a
+                      href={doc.url || doc.contentUrl || doc.file_url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="rounded-full bg-gray-100 px-4 py-1 text-sm font-medium text-gray-500 hover:bg-gray-200"
+                    >
+                      Download
+                    </a>
+                  ) : (
+                    <button className="rounded-full bg-gray-100 px-4 py-1 text-sm font-medium text-gray-500 hover:bg-gray-200">
+                      Download
+                    </button>
+                  )}
                 </div>
               ))}
             </div>

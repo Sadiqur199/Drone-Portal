@@ -5,7 +5,9 @@ const API = axios.create({
 });
 
 API.interceptors.request.use((config) => {
-  const token = localStorage.getItem("dronePortalToken");
+  const token =
+    localStorage.getItem("dronePortalToken") ||
+    localStorage.getItem("dronePortalAdminToken");
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }

@@ -1,4 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AdminLogin from "./pages/admin/AdminLogin";
+import AdminPanel from "./pages/admin/AdminPanel";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Checklists from "./pages/dashboard/Checklists";
@@ -15,6 +17,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin" element={<AdminPanel />} />
         <Route path="/" element={<Dashboard />}>
           <Route index element={<DashboardHome />} />
           <Route path="my-drone" element={<MyDrone />} />

@@ -1,9 +1,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import API from "../../api/axios";
-import { normalizeApiDrone } from "./data";
+import { defaultDroneId, getDashboardData, normalizeApiDrone } from "./data";
 
 export const authStorageKey = "dronePortalUser";
 export const authTokenKey = "dronePortalToken";
+const publishedProfilesKey = "dronePortalAdminPublishedProfiles";
 
 export const getStoredPortalUser = () => {
   try {
@@ -24,6 +25,18 @@ export const getAuthenticatedPortalUser = () => {
 
 export const DashboardContext = createContext(null);
 
+const getLocalDashboardData = () => {
+  const user = getStoredPortalUser();
+  const droneId = user?.droneId || user?.drone_id || defaultDroneId;
+
+  try {
+    const profiles = JSON.parse(localStorage.getItem(publishedProfilesKey)) || {};
+    return profiles[droneId] || getDashboardData(droneId);
+  } catch {
+    return getDashboardData(droneId);
+  }
+};
+
 export const DashboardProvider = ({ children }) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -37,7 +50,8 @@ export const DashboardProvider = ({ children }) => {
       setError(null);
     } catch (err) {
       console.error("Failed to fetch dashboard data:", err);
-      setError(err.response?.data?.error || "Failed to load dashboard data.");
+      setData(getLocalDashboardData());
+      setError(null);
     } finally {
       setLoading(false);
     }
