@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { portalUsers } from "./dashboard/data";
-import { authStorageKey } from "./dashboard/useDashboardData";
+import { authStorageKey, authTokenKey } from "./dashboard/useDashboardData";
+import API from "../api/axios";
 
 const Login = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -14,28 +15,36 @@ const Login = () => {
     setError("");
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const matchedUser = portalUsers.find(
-      (user) =>
-        user.username === form.username.trim() && user.password === form.password
-    );
-
-    if (!matchedUser) {
-      setError("Username or password is incorrect.");
+    if (!form.username.trim() || !form.password) {
+      setError("Please enter both username and password.");
       return;
     }
 
-    localStorage.setItem(
-      authStorageKey,
-      JSON.stringify({
-        username: matchedUser.username,
-        droneId: matchedUser.droneId,
-      })
-    );
+    try {
+      setLoading(true);
+      setError("");
 
-    navigate("/", { replace: true });
+      const response = await API.post("/login", {
+        username: form.username.trim(),
+        password: form.password,
+      });
+
+      const { access_token, user } = response.data;
+
+      localStorage.setItem(authTokenKey, access_token);
+      localStorage.setItem(authStorageKey, JSON.stringify(user));
+
+      navigate("/", { replace: true });
+    } catch (err) {
+      console.error("Login request failed:", err);
+      const errMsg = err.response?.data?.message || err.response?.data?.errors?.username?.[0] || "Incorrect username or password.";
+      setError(errMsg);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -95,9 +104,10 @@ const Login = () => {
 
           <button
             type="submit"
-            className="w-full rounded-xl bg-green-700 px-5 py-3 font-semibold text-white transition hover:bg-green-800"
+            disabled={loading}
+            className="w-full rounded-xl bg-green-700 px-5 py-3 font-semibold text-white transition hover:bg-green-800 disabled:opacity-50"
           >
-            Login
+            {loading ? "Logging in..." : "Login"}
           </button>
         </form>
 
